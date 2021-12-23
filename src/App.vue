@@ -49,8 +49,13 @@ export default {
     },
     addTodo(todoItem) {
       console.log("oh my god!");
+      var temp = localStorage.length;
       localStorage.setItem(todoItem, todoItem);
-      this.todoItems.push(todoItem);
+      console.log(temp, todoItem.length);
+      if(temp != todoItem.length) {
+        this.todoItems.push(todoItem);
+      };
+      console.log("oh my god!");
     },
     ClearAll() {
       console.log("OHMYGOD!");

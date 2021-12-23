@@ -1,6 +1,9 @@
 <template>
     <div>
-        <button v-on:click="removetodoItem">erase everything</button>
+        <!-- <button v-on:click="removetodoItem">erase everything</button> -->
+        <span class="removeAllBtn" type="button" v-on:click="removetodoItem">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </span>
     </div>
 
 </template>

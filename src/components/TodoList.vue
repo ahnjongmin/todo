@@ -1,10 +1,11 @@
 <template>
     <section>
-        <div class="correction">
-            <input type="text" v-model="changeTodoItem" placeholder="Change Value" v-on:keyup.enter='doit' v-if='flagpropsdata'>
+        <div class = "correction_box">
+            <div v-if='!flagpropsdata'>This area is for Correction.</div>
+            <input class="correction" type="text" v-model="changeTodoItem" placeholder="Change Value" v-on:keyup.enter='doit' v-if='flagpropsdata'>
         </div>
-        <ul>
-            <li v-for="(todoItem, index) in propsdata" class="shadow">
+        <transition-group name="list" tag="ul">
+            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
                 <i class="checkBtn fa fa-check" aria-hidden="true"></i>
                 {{ todoItem }}
                 <span class="changeBtn" type="button" v-on:click="changeTodo(todoItem, index)">
@@ -14,7 +15,7 @@
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </span>
             </li>
-        </ul>
+        </transition-group>
     </section>
 </template>
 
@@ -70,6 +71,13 @@ export default{
         background : white;
         border-radius: 5px;
     }
+    .correction_box {
+        margin : 0.5rem 0;
+        background: white;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 5px;
+    }
     .checkBtn {
         line-height : 45px;
         color : #62acde;
@@ -83,4 +91,19 @@ export default{
         margin-left : auto;
         color : #de4343;
     }
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .list-move {
+        transition: transform 1s;
+    }
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to {
+        opacity:0;
+        transform: translateX(30px);
+    }
+
 </style>
