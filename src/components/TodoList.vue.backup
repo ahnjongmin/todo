@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="correction">
-            <input type="text" v-model="changeTodoItem" placeholder="Change Value" v-on:keyup.enter='doit' v-if='flagpropsdata'>
+            <input type="text" v-model="changeTodoItem" placeholder="Change Value" v-on:keyup.enter='doit' v-if='flag'>
         </div>
         <ul>
             <li v-for="(todoItem, index) in propsdata" class="shadow">
@@ -20,32 +20,37 @@
 
 <script>
 export default{
-    props: ['propsdata', 'flagpropsdata'],
+    props: ['propsdata'],
+    flagprops: ['flagprops'],
     data() {
         return {
             todoItems: [],
             changeTodoItem: '',
-            local_todoItem: [],
+            flag : false,
+            local_todoItem:[],
             local_index: '',
         }
     },
+
+    beforeUpdate() {
+        },
 
     methods: {
         removeTodo(todoItem, index) {
             console.log("removeTodo in TodoList.vue");
             this.$emit('removeTodo', todoItem, index);
-            this.$emit('flagChangeSignal', false);
+            this.flag = false;
         },
 
         changeTodo(todoItem, index) {
             console.log("changeTodo in TodoList.vue");
-            this.$emit('flagChangeSignal', true);
+            this.flag=true;
             this.local_todoItem = todoItem;
             this.local_index = index;
             this.changeTodoItem = todoItem;
         },
         doit(){
-            this.$emit('flagChangeSignal', false);
+            this.flag=false;
             this.$emit('changeTodo', this.local_todoItem, this.changeTodoItem, this.local_index);
         }
     }

@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-bind:flagpropsdata="myflag" v-on:flagChangeSignal="flagChange" v-on:removeTodo="removeTodoItem" v-on:changeTodo="changeTodoItem"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-bind:flagprops="flagprops" v-on:removeTodo="removeTodoItem" v-on:changeTodo="changeTodoItem"></TodoList>
     <TodoFooter v-on:removetodoItem="ClearAll"></TodoFooter>
     <!-- changed -->
   </div>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       todoItems: [],
-      myflag: false,
+      flagprops: false,
     }
   },
 
@@ -44,9 +44,6 @@ export default {
 
 
   methods: {
-    flagChange(which) {
-      this.myflag=which;
-    },
     addTodo(todoItem) {
       console.log("oh my god!");
       localStorage.setItem(todoItem, todoItem);
@@ -56,7 +53,7 @@ export default {
       console.log("OHMYGOD!");
       localStorage.clear();
       this.todoItems=[];
-      this.myflag = false;
+      this.flagprops = false;
       console.log("OHMYGOD!");
     },
     removeTodoItem(todoItem, index) {
@@ -70,7 +67,6 @@ export default {
       this.todoItems.splice(index, 1);
       localStorage.setItem(after, after);
       this.todoItems.push(after);
-      this.myflag = false;
     }
     // changed
   }
